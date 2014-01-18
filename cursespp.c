@@ -155,7 +155,9 @@ int main ( int argc , char *argv[])
          wait for key press 
 
     */
- 
+      
+    fgets(line,LINE_MAX-2 ,metafile);
+
     while(!feof(metafile))
     { 
        
@@ -163,7 +165,7 @@ int main ( int argc , char *argv[])
        if ( strlen(line) > 2 )
        { 
            buffer = malloc( get_file_size(trimwhitespace(line)) + 1); 
-           load_file((char *)buffer,line);
+	   load_file((char *)buffer,line);
            newtTextboxSetText(displayText,(const char *)buffer);
            newtRefresh();  
            newtRunForm(form);
@@ -172,6 +174,7 @@ int main ( int argc , char *argv[])
       fgets(line,LINE_MAX-2 ,metafile);
     }
 
+    newtPopWindow(); 
     newtWaitForKey();
     newtFinished();
     return 0;   
